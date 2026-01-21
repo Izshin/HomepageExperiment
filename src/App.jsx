@@ -20,7 +20,7 @@ import accountIcon from './assets/Logos/Account.png';
 // Reusable Scroll Animation Component
 const ScrollReveal = ({ children, className, style, direction = 'left' }) => {
   const initialX = direction === 'left' ? -50 : 50;
-  
+
   return (
     <motion.div
       className={className}
@@ -65,29 +65,29 @@ const PhoneIcon = () => (
 const Header = ({ reset }) => (
   <header className="header">
     <div className="header-left">
-       <div className="logo-container" onClick={reset}>
-           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-               <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-               <circle cx="8.5" cy="8.5" r="1.5"/>
-               <polyline points="21 15 16 10 5 21"/>
-           </svg>
-           <svg width="150" height="25" viewBox="0 0 60 10" stroke="black" fill="none" strokeWidth="1.5">
-               <path d="M0,5 Q10,0 25,5 T60,2 " />
-           </svg>
-       </div>
+      <div className="logo-container" onClick={reset}>
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+          <circle cx="8.5" cy="8.5" r="1.5" />
+          <polyline points="21 15 16 10 5 21" />
+        </svg>
+        <svg width="150" height="25" viewBox="0 0 60 10" stroke="black" fill="none" strokeWidth="1.5">
+          <path d="M0,5 Q10,0 25,5 T60,2 " />
+        </svg>
+      </div>
     </div>
     <div className="header-nav">
       <div className="nav-item">
         <span>Contact</span>
-        <img src={contactIcon} alt="contact" className="nav-icon"/>
+        <img src={contactIcon} alt="contact" className="nav-icon" />
       </div>
       <div className="nav-item" onClick={reset}>
         <span>Home page</span>
-        <img src={theArtistIcon} alt="home" className="nav-icon" /> 
+        <img src={theArtistIcon} alt="home" className="nav-icon" />
       </div>
       <div className="nav-item">
         <span>Pattern maker</span>
-        <img src={swaterIcon} alt="maker" className="nav-icon"/>
+        <img src={swaterIcon} alt="maker" className="nav-icon" />
       </div>
       <div className="user-icon">
         <img src={accountIcon} alt="account" className="account-icon" />
@@ -99,14 +99,35 @@ const Header = ({ reset }) => (
 const ArtistContent = ({ onNavigate }) => (
   <div className="detail-view">
     <div className="detail-header">
-      <img src={theArtistIcon} alt="The Artist" className="detail-icon" />
-      <h2 className="detail-title">You've chosen the artist</h2>
-      <p className="detail-subtitle">
+      <motion.img
+        src={theArtistIcon}
+        alt="The Artist"
+        className="detail-icon"
+        layoutId="artist-icon"
+        transition={{ type: "spring", stiffness: 900, damping: 70 }}
+      />
+      <motion.h2
+        className="detail-title"
+        layoutId="artist-title"
+        transition={{ type: "spring", stiffness: 900, damping: 70 }}
+      >
+        You've chosen the artist
+      </motion.h2>
+      <motion.p
+        className="detail-subtitle"
+        layoutId="artist-desc"
+        transition={{ type: "spring", stiffness: 900, damping: 70 }}
+      >
         From pixel to stitch. Bring your own image or explore our library. Your design, your gauge.
-      </p>
+      </motion.p>
     </div>
 
-    <div className="content-grid">
+    <motion.div
+      className="content-grid"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.3, duration: 0.5 }}
+    >
       {/* Row 1 */}
       <div className="content-row">
         <ScrollReveal className="content-card" direction="left">
@@ -116,18 +137,18 @@ const ArtistContent = ({ onNavigate }) => (
             Stuck? Step away from the blank grid and browse thousands of community-created motifs. From pixel art to classic cables, find what inspires you and purchase it in a single click.
           </p>
           <p className="card-description">
-              Grab a pro-level design, unlock the icons to knit it, and make it your own.
+            Grab a pro-level design, unlock the icons to knit it, and make it your own.
           </p>
         </ScrollReveal>
         <ScrollReveal className="media-card" direction="left">
-             <img src={videoIcon} alt="video" className="media-placeholder-icon" />
+          <img src={videoIcon} alt="video" className="media-placeholder-icon" />
         </ScrollReveal>
       </div>
 
       {/* Row 2 */}
       <div className="content-row">
         <ScrollReveal className="media-card" direction="right">
-            <img src={videoIcon} alt="video" className="media-placeholder-icon" />
+          <img src={videoIcon} alt="video" className="media-placeholder-icon" />
         </ScrollReveal>
         <ScrollReveal className="content-card" direction="right">
           <h3>The Digital Canvas</h3>
@@ -141,8 +162,8 @@ const ArtistContent = ({ onNavigate }) => (
         </ScrollReveal>
       </div>
 
-       {/* Row 3 */}
-       <div className="content-row">
+      {/* Row 3 */}
+      <div className="content-row">
         <ScrollReveal className="content-card" direction="left">
           <h3>State of the art tools</h3>
           <p className="card-subtitle">Stay on track. Style on the fly.</p>
@@ -154,12 +175,17 @@ const ArtistContent = ({ onNavigate }) => (
           </p>
         </ScrollReveal>
         <ScrollReveal className="media-card" direction="left">
-            <img src={videoIcon} alt="video" className="media-placeholder-icon" />
+          <img src={videoIcon} alt="video" className="media-placeholder-icon" />
         </ScrollReveal>
       </div>
-    </div>
+    </motion.div>
 
-    <div className="footer-links">
+    <motion.div
+      className="footer-links"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.5 }}
+    >
       <button className="footer-link-item">
         <img src={theArtistIcon} alt="Artist" className="footer-icon" />
         <span className="footer-main-text">Start your Masterpiece</span>
@@ -168,23 +194,44 @@ const ArtistContent = ({ onNavigate }) => (
       <button className="footer-link-item" onClick={onNavigate}>
         <img src={theArchitectIcon} alt="Architect" className="footer-icon" />
         <span className="footer-main-text">Plan the Perfect Fit</span>
-        <span className="footer-sub-text">Discover <strong style={{color:'black'}}>The architect</strong> ↗</span>
+        <span className="footer-sub-text">Discover <strong style={{ color: 'black' }}>The architect</strong> ↗</span>
       </button>
-    </div>
+    </motion.div>
   </div>
 );
 
 const ArchitectContent = ({ onNavigate }) => (
   <div className="detail-view">
     <div className="detail-header">
-      <img src={theArchitectIcon} alt="The Architect" className="detail-icon" />
-      <h2 className="detail-title">You've chosen the architect</h2>
-      <p className="detail-subtitle">
+      <motion.img
+        src={theArchitectIcon}
+        alt="The Architect"
+        className="detail-icon"
+        layoutId="architect-icon"
+        transition={{ type: "spring", stiffness: 900, damping: 70 }}
+      />
+      <motion.h2
+        className="detail-title"
+        layoutId="architect-title"
+        transition={{ type: "spring", stiffness: 900, damping: 70 }}
+      >
+        You've chosen the architect
+      </motion.h2>
+      <motion.p
+        className="detail-subtitle"
+        layoutId="architect-desc"
+        transition={{ type: "spring", stiffness: 900, damping: 70 }}
+      >
         From blueprint to garment. Choose a structural pattern, customize the measurements, and let the logic guide you. Your size, your fit.
-      </p>
+      </motion.p>
     </div>
 
-    <div className="content-grid">
+    <motion.div
+      className="content-grid"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.3, duration: 0.5 }}
+    >
       {/* Row 1 */}
       <div className="content-row">
         <ScrollReveal className="content-card" direction="left">
@@ -198,58 +245,58 @@ const ArchitectContent = ({ onNavigate }) => (
           </p>
         </ScrollReveal>
         <ScrollReveal className="media-card" direction="left" style={{ overflow: 'hidden' }}>
-             <motion.div 
-                className="garment-scroll-track"
-                animate={{ x: [0, -752] }}
-                transition={{ 
-                  x: {
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    duration: 15,
-                    ease: "linear"
-                  }
-                }}
-             >
-                {/* First Set */}
-                <div className="garment-item"><img src={swaterIcon} alt="sweater" /></div>
-                <div className="garment-item"><img src={mittensIcon} alt="mittens" /></div>
-                <div className="garment-item"><img src={hatIcon} alt="hat" /></div>
-                <div className="garment-item"><img src={scarfIcon} alt="scarf" /></div>
+          <motion.div
+            className="garment-scroll-track"
+            animate={{ x: [0, -752] }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 15,
+                ease: "linear"
+              }
+            }}
+          >
+            {/* First Set */}
+            <div className="garment-item"><img src={swaterIcon} alt="sweater" /></div>
+            <div className="garment-item"><img src={mittensIcon} alt="mittens" /></div>
+            <div className="garment-item"><img src={hatIcon} alt="hat" /></div>
+            <div className="garment-item"><img src={scarfIcon} alt="scarf" /></div>
 
-                {/* Second Set (Duplicate for seamless loop) */}
-                <div className="garment-item"><img src={swaterIcon} alt="sweater" /></div>
-                <div className="garment-item"><img src={mittensIcon} alt="mittens" /></div>
-                <div className="garment-item"><img src={hatIcon} alt="hat" /></div>
-                <div className="garment-item"><img src={scarfIcon} alt="scarf" /></div>
+            {/* Second Set (Duplicate for seamless loop) */}
+            <div className="garment-item"><img src={swaterIcon} alt="sweater" /></div>
+            <div className="garment-item"><img src={mittensIcon} alt="mittens" /></div>
+            <div className="garment-item"><img src={hatIcon} alt="hat" /></div>
+            <div className="garment-item"><img src={scarfIcon} alt="scarf" /></div>
 
-                {/* Third Set (Additional for ultra-smooth scroll) */}
-                <div className="garment-item"><img src={swaterIcon} alt="sweater" /></div>
-                <div className="garment-item"><img src={mittensIcon} alt="mittens" /></div>
-                <div className="garment-item"><img src={hatIcon} alt="hat" /></div>
-                <div className="garment-item"><img src={scarfIcon} alt="scarf" /></div>
-             </motion.div>
+            {/* Third Set (Additional for ultra-smooth scroll) */}
+            <div className="garment-item"><img src={swaterIcon} alt="sweater" /></div>
+            <div className="garment-item"><img src={mittensIcon} alt="mittens" /></div>
+            <div className="garment-item"><img src={hatIcon} alt="hat" /></div>
+            <div className="garment-item"><img src={scarfIcon} alt="scarf" /></div>
+          </motion.div>
         </ScrollReveal>
       </div>
 
       {/* Row 2 */}
       <div className="content-row">
         <ScrollReveal className="media-card" direction="right">
-             <img src={videoIcon} alt="video" className="media-placeholder-icon" />
+          <img src={videoIcon} alt="video" className="media-placeholder-icon" />
         </ScrollReveal>
         <ScrollReveal className="content-card" direction="right">
           <h3>Scaffold the Anatomy</h3>
           <p className="card-subtitle">Your vision. Your rules. Your piece.</p>
           <p className="card-description">
-             Precision from neck to hem.
+            Precision from neck to hem.
           </p>
           <p className="card-description">
-             A base is just a starting point. Fine-tune every aspect of your garment by selecting specific attributes. Define the colors, swap a crew neck for a V-neck, adjust the arm taper, or modify the hem. The look adapts to your own decisions.
+            A base is just a starting point. Fine-tune every aspect of your garment by selecting specific attributes. Define the colors, swap a crew neck for a V-neck, adjust the arm taper, or modify the hem. The look adapts to your own decisions.
           </p>
         </ScrollReveal>
       </div>
 
-       {/* Row 3 */}
-       <div className="content-row">
+      {/* Row 3 */}
+      <div className="content-row">
         <ScrollReveal className="content-card" direction="left">
           <h3>Simulate the Structure</h3>
           <p className="card-subtitle">Verify the geometry in real-time.</p>
@@ -261,14 +308,14 @@ const ArchitectContent = ({ onNavigate }) => (
           </p>
         </ScrollReveal>
         <ScrollReveal className="media-card" direction="left">
-            <img src={videoIcon} alt="video" className="media-placeholder-icon" />
+          <img src={videoIcon} alt="video" className="media-placeholder-icon" />
         </ScrollReveal>
       </div>
 
-       {/* Row 4 */}
-       <div className="content-row">
+      {/* Row 4 */}
+      <div className="content-row">
         <ScrollReveal className="media-card" direction="right">
-             <img src={videoIcon} alt="video" className="media-placeholder-icon" />
+          <img src={videoIcon} alt="video" className="media-placeholder-icon" />
         </ScrollReveal>
         <ScrollReveal className="content-card" direction="right">
           <h3>Build according to plan</h3>
@@ -281,9 +328,14 @@ const ArchitectContent = ({ onNavigate }) => (
           </p>
         </ScrollReveal>
       </div>
-    </div>
+    </motion.div>
 
-    <div className="footer-links">
+    <motion.div
+      className="footer-links"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.5 }}
+    >
       <button className="footer-link-item">
         <img src={theArchitectIcon} alt="Architect" className="footer-icon" />
         <span className="footer-main-text">Start building</span>
@@ -292,9 +344,9 @@ const ArchitectContent = ({ onNavigate }) => (
       <button className="footer-link-item" onClick={onNavigate}>
         <img src={theArtistIcon} alt="Artist" className="footer-icon" />
         <span className="footer-main-text">Reveal your creativity</span>
-        <span className="footer-sub-text">Discover: <strong style={{color:'black'}}>The artist</strong> ↗</span>
+        <span className="footer-sub-text">Discover: <strong style={{ color: 'black' }}>The artist</strong> ↗</span>
       </button>
-    </div>
+    </motion.div>
   </div>
 );
 
@@ -315,7 +367,15 @@ function App() {
   };
 
   const getWidth = (option) => {
-    if (selectedOption) return '0%'; 
+    // If we have a selection...
+    if (selectedOption) {
+      // If this is the selected option, it takes 100%
+      if (selectedOption === option) return '100%';
+      // If the other one is selected, this one takes 0%
+      return '0%';
+    }
+
+    // Default interaction state (no selection)
     if (hoveredOption === option) return '65%';
     if (hoveredOption && hoveredOption !== option) return '45%';
     return '50%';
@@ -324,77 +384,122 @@ function App() {
   return (
     <div className="container">
       <Header reset={() => setSelectedOption(null)} />
-      
+
       <main className="main-content">
-        {/* Split Screen Layer */}
-        {selectedOption === null && (
-          <div className="split-view">
-             
-             {/* Artist Panel */}
-             <motion.div 
-               className="panel"
-               onMouseEnter={() => handleHover('artist')}
-               onMouseLeave={() => setHoveredOption(null)}
-               onClick={() => handleClick('artist')}
-               animate={{ 
-                 width: getWidth('artist'),
-               }}
-               transition={{ type: 'spring', stiffness: 200, damping: 30 }}
-               style={{ borderRight: '1px solid black' }}
-             >
-                <div className="panel-content">
-                    <img src={theArtistIcon} alt="The artist" className="panel-icon" />
-                    <h2 className="panel-title">The artist</h2>
-                    <p className="panel-desc">
-                        Discover our motif creation tools, extensive library and colour picker to unleash your creativity
-                    </p>
-                </div>
-             </motion.div>
+        <div
+          className="split-view"
+          style={{
+            height: selectedOption ? 'auto' : 'calc(100vh - 80px)',
+            overflow: selectedOption ? 'visible' : 'hidden',
+            // When an option is selected, we might want the split-view to not limit height
+            flexDirection: 'row'
+          }}
+        >
 
-             {/* Architect Panel */}
-             <motion.div 
-               className="panel"
-               onMouseEnter={() => handleHover('architect')}
-               onMouseLeave={() => setHoveredOption(null)}
-               onClick={() => handleClick('architect')}
-               animate={{ 
-                 width: getWidth('architect'),
-               }}
-               transition={{ type: 'spring', stiffness: 200, damping: 30 }}
-             >
-                <div className="panel-content">
-                    <img src={theArchitectIcon} alt="The architect" className="panel-icon" />
-                    <h2 className="panel-title">The architect</h2>
-                    <p className="panel-desc">
-                        Structure comes first, art second, discover our wide variety of patterns, precise knitting instruction tools and line by line charts
-                    </p>
-                </div>
-             </motion.div>
+          {/* Artist Panel */}
+          <motion.div
+            className="panel"
+            onMouseEnter={() => handleHover('artist')}
+            onMouseLeave={() => setHoveredOption(null)}
+            onClick={() => !selectedOption && handleClick('artist')}
+            animate={{
+              width: getWidth('artist'),
+            }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              borderRight: selectedOption === 'architect' ? 'none' : '1px solid black',
+              overflow: selectedOption === 'artist' ? 'visible' : 'hidden',
+              height: selectedOption === 'artist' ? 'auto' : '100%',
+              minHeight: selectedOption === 'artist' ? 'calc(100vh - 80px)' : 'auto',
+              justifyContent: selectedOption === 'artist' ? 'flex-start' : 'center',
+              cursor: selectedOption ? 'auto' : 'pointer'
+            }}
+          >
+            {selectedOption === 'artist' ? (
+              <motion.div
+                style={{ width: '100%' }}
+              >
+                <ArtistContent onNavigate={() => { handleClick('architect'); }} />
+              </motion.div>
+            ) : (
+              <div className="panel-content" style={{ opacity: selectedOption === 'architect' ? 0 : 1, transition: 'opacity 0.2s' }}>
+                <motion.img
+                  src={theArtistIcon}
+                  alt="The artist"
+                  className="panel-icon"
+                  layoutId="artist-icon"
+                  transition={{ type: "spring", stiffness: 900, damping: 70 }}
+                />
+                <motion.h2
+                  className="panel-title"
+                  layoutId="artist-title"
+                  transition={{ type: "spring", stiffness: 900, damping: 70 }}
+                >
+                  The artist
+                </motion.h2>
+                <motion.p
+                  className="panel-desc"
+                  layoutId="artist-desc"
+                  transition={{ type: "spring", stiffness: 900, damping: 70 }}
+                >
+                  Discover our motif creation tools, extensive library and colour picker to unleash your creativity
+                </motion.p>
+              </div>
+            )}
+          </motion.div>
 
-          </div>
-        )}
+          {/* Architect Panel */}
+          <motion.div
+            className="panel"
+            onMouseEnter={() => handleHover('architect')}
+            onMouseLeave={() => setHoveredOption(null)}
+            onClick={() => !selectedOption && handleClick('architect')}
+            animate={{
+              width: getWidth('architect'),
+            }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              overflow: selectedOption === 'architect' ? 'visible' : 'hidden',
+              height: selectedOption === 'architect' ? 'auto' : '100%',
+              minHeight: selectedOption === 'architect' ? 'calc(100vh - 80px)' : 'auto',
+              justifyContent: selectedOption === 'architect' ? 'flex-start' : 'center',
+              cursor: selectedOption ? 'auto' : 'pointer'
+            }}
+          >
+            {selectedOption === 'architect' ? (
+              <motion.div
+                style={{ width: '100%' }}
+              >
+                <ArchitectContent onNavigate={() => { handleClick('artist'); }} />
+              </motion.div>
+            ) : (
+              <div className="panel-content" style={{ opacity: selectedOption === 'artist' ? 0 : 1, transition: 'opacity 0.2s' }}>
+                <motion.img
+                  src={theArchitectIcon}
+                  alt="The architect"
+                  className="panel-icon"
+                  layoutId="architect-icon"
+                  transition={{ type: "spring", stiffness: 900, damping: 70 }}
+                />
+                <motion.h2
+                  className="panel-title"
+                  layoutId="architect-title"
+                  transition={{ type: "spring", stiffness: 900, damping: 70 }}
+                >
+                  The architect
+                </motion.h2>
+                <motion.p
+                  className="panel-desc"
+                  layoutId="architect-desc"
+                  transition={{ type: "spring", stiffness: 900, damping: 70 }}
+                >
+                  Structure comes first, art second, discover our wide variety of patterns, precise knitting instruction tools and line by line charts
+                </motion.p>
+              </div>
+            )}
+          </motion.div>
 
-        {/* Content Layers */}
-        {selectedOption === 'artist' && (
-           <motion.div 
-             initial={{ opacity: 0, y: 20 }} 
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.5 }}
-           >
-              <ArtistContent onNavigate={() => { setSelectedOption('architect'); window.scrollTo(0, 0); }} />
-           </motion.div>
-        )}
-
-        {selectedOption === 'architect' && (
-            <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-            >
-              <ArchitectContent onNavigate={() => { setSelectedOption('artist'); window.scrollTo(0,0); }}/>
-            </motion.div>
-        )}
-
+        </div>
       </main>
     </div>
   );
